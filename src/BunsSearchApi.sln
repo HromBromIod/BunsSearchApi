@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BunsSearchApi.Web", "BunsSearchApi.Web\BunsSearchApi.Web.csproj", "{FA56CC94-A230-4E5C-B76A-16581E7B40A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BunsSearchApi.BusinessLogic", "BunsSearchApi.BusinessLogic\BunsSearchApi.BusinessLogic.csproj", "{1B60FFA9-9990-4765-BCBB-6CB76682E5B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BunsSearchApi.Core", "BunsSearchApi.Core\BunsSearchApi.Core.csproj", "{526BAEB6-6049-4261-A51D-2620647A1F98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BunsSearchApi.Integration", "BunsSearchApi.Integration\BunsSearchApi.Integration.csproj", "{6C11D37B-78DF-4C7B-9542-E1C4BD18D560}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA56CC94-A230-4E5C-B76A-16581E7B40A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA56CC94-A230-4E5C-B76A-16581E7B40A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA56CC94-A230-4E5C-B76A-16581E7B40A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA56CC94-A230-4E5C-B76A-16581E7B40A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B60FFA9-9990-4765-BCBB-6CB76682E5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B60FFA9-9990-4765-BCBB-6CB76682E5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B60FFA9-9990-4765-BCBB-6CB76682E5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B60FFA9-9990-4765-BCBB-6CB76682E5B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{526BAEB6-6049-4261-A51D-2620647A1F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{526BAEB6-6049-4261-A51D-2620647A1F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{526BAEB6-6049-4261-A51D-2620647A1F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{526BAEB6-6049-4261-A51D-2620647A1F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C11D37B-78DF-4C7B-9542-E1C4BD18D560}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C11D37B-78DF-4C7B-9542-E1C4BD18D560}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C11D37B-78DF-4C7B-9542-E1C4BD18D560}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C11D37B-78DF-4C7B-9542-E1C4BD18D560}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
