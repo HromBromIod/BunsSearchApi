@@ -8,7 +8,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddBusinessLogic(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddScoped<IBunsSearchService, BunsSearchService>();
+        serviceCollection.AddScoped<IBunSearchService, BunSearchService>();
 
         return serviceCollection;
     }

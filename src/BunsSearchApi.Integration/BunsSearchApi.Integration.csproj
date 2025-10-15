@@ -10,8 +10,4 @@
       <ProjectReference Include="..\BunsSearchApi.Core\BunsSearchApi.Core.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="OllamaAi\" />
-    </ItemGroup>
-
 </Project>

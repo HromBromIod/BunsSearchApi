@@ -11,8 +11,7 @@ public static class BunResponseMapper
         {
             Name = bun.Name,
             SearchParameter = bun.SearchParameter,
-            Description = bun.Description,
-            Type = bun.Type
+            Message = bun.Message
         };
     }
 }

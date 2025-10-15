@@ -8,8 +8,6 @@ public class BunResponse
     public required string Name { get; set; }
     [JsonPropertyName("search_parameter")]
     public required string SearchParameter { get; set; }
-    [JsonPropertyName("bun_description")]
-    public string? Description { get; set; }
-    [JsonPropertyName("bun_type")]
-    public string? Type { get; set; }
+    [JsonPropertyName("message")]
+    public string? Message { get; set; }
 }
