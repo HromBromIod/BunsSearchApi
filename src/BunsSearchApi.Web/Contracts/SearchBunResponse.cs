@@ -2,12 +2,12 @@
 
 namespace BunsSearchApi.Web.Contracts;
 
-public class BunResponse
+public class SearchBunResponse
 {
     [JsonPropertyName("bun_name")]
-    public required string Name { get; set; }
+    public required string BunName { get; set; }
     [JsonPropertyName("search_parameter")]
     public required string SearchParameter { get; set; }
-    [JsonPropertyName("message")]
-    public string? Message { get; set; }
+    [JsonPropertyName("message_text")]
+    public string? MessageText { get; set; }
 }

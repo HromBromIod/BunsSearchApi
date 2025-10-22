@@ -5,13 +5,13 @@ namespace BunsSearchApi.Web.Models;
 
 public static class BunResponseMapper
 {
-    public static BunResponse ToResponse(this Bun bun)
+    public static SearchBunResponse ToResponse(this Bun bun)
     {
-        return new BunResponse
+        return new SearchBunResponse
         {
-            Name = bun.Name,
+            BunName = bun.Name,
             SearchParameter = bun.SearchParameter,
-            Message = bun.Message
+            MessageText = bun.MessageText
         };
     }
 }

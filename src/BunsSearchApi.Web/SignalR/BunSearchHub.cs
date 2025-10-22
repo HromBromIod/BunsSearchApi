@@ -5,23 +5,23 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace BunsSearchApi.Web.SignalR;
 
-public class BunHub(IBunSearchService searchService) : Hub
+public class BunSearchHub(IBunSearchService searchService) : Hub
 {
-    public async Task<BunResponse> SearchHistory(BunRequest request)
+    public async Task SearchHistory(SearchBunRequest request)
     {
         var result = await searchService.SearchBunHistory(request.BunName, CancellationToken.None);
-        return result.ToResponse();
+        await Clients.Caller.SendAsync("SearchResponse", result.ToResponse());
     }
     
-    public async Task<BunResponse> SearchStory(BunRequest request)
+    public async Task SearchStory(SearchBunRequest request)
     {
         var result = await searchService.SearchBunStory(request.BunName, CancellationToken.None);
-        return result.ToResponse();
+        await Clients.Caller.SendAsync("SearchResponse", result.ToResponse());
     }
     
-    public async Task<BunResponse> SearchRecipe(BunRequest request)
+    public async Task SearchRecipe(SearchBunRequest request)
     {
         var result = await searchService.SearchBunRecipe(request.BunName, CancellationToken.None);
-        return result.ToResponse();
+        await Clients.Caller.SendAsync("SearchResponse", result.ToResponse());
     }
 }

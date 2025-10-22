@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BunsSearchApi.Web.Controllers;
 
-[Route("api/v1/bun")]
+[Route("api/v1/bun/search")]
 [ApiController]
-public class BunController(
+public class SearchBunController(
     IBunSearchService bunSearchService) : ControllerBase
 {
     [HttpGet("{bunName}/history")]

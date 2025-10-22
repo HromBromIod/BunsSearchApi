@@ -1,8 +1,9 @@
 ﻿namespace BunsSearchApi.BusinessLogic.Contracts;
 
-public class Bun
+public class BunChunk
 {
     public required string Name { get; set; }
     public required string SearchParameter { get; set; }
-    public string? MessageText { get; set; }
+    public string? MessageTextPart { get; set; }
+    public required bool IsComplete { get; set; }
 }

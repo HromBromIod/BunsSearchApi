@@ -12,7 +12,7 @@ public static class ServiceCollectionExtensions
     {
         serviceCollection.Configure<OllamaApiSettings>(configuration.GetRequiredSection(nameof(OllamaApiSettings)));
         
-        serviceCollection.AddScoped<IOllamaService, OllamaService>();
+        serviceCollection.AddSingleton<IOllamaService, OllamaService>();
         
         return serviceCollection;
     }
