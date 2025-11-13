@@ -10,8 +10,7 @@ public static class SearchBunChunkResponseMapper
         return new SearchBunChunkResponse
         {
             BunName = chunk.Name,
-            SearchParameter = chunk.SearchParameter,
-            MessageTextPart = chunk.MessageTextPart,
+            MessageTextChunk = chunk.MessageTextChunk,
             IsCompleted = chunk.IsComplete
         };
     }

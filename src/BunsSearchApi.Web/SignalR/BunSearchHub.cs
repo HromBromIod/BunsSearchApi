@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace BunsSearchApi.Web.SignalR;
 
-public class BunSearchHub(IBunSearchService searchService) : Hub
+public class BunSearchHub(
+    IBunSearchService searchService,
+    ILogger<BunSearchHub> logger) : Hub
 {
     public async Task SearchHistory(SearchBunRequest request)
     {

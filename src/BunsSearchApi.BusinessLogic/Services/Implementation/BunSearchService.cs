@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using BunsSearchApi.BusinessLogic.Contracts;
 using BunsSearchApi.BusinessLogic.Models;
+using BunsSearchApi.Integration.OllamaAi.Contracts;
 using BunsSearchApi.Integration.OllamaAi.Services;
 
 namespace BunsSearchApi.BusinessLogic.Services.Implementation;
@@ -34,8 +35,9 @@ internal class BunSearchService(IOllamaService ollamaService): IBunSearchService
             Name = bunName,
             SearchParameter = searchParameter,
         };
-        
-        var result = await ollamaService.GetResponse(prompt, cancellationToken);
+
+        var request = new OllamaRequest(Guid.NewGuid().ToString(), prompt);
+        var result = await ollamaService.GetResponse(request, cancellationToken);
         if (result == null)
         {
             resultBun.MessageText = ErrorBunMessageText;

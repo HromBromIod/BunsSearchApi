@@ -11,9 +11,7 @@ public static class ServiceCollectionExtensions
     {
         builder.Services.AddHttpClient();
         builder.Services.AddIntegrations(builder.Configuration);
-        
         builder.Services.AddBusinessLogic();
-
         builder.Services.AddSignalR();
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
@@ -29,12 +27,10 @@ public static class ServiceCollectionExtensions
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        app.UseHttpsRedirection();
-        
         app.UseExceptionHandling(app.Services.GetRequiredService<ILoggerFactory>());
         app.MapControllers();
         app.MapHub<BunSearchHub>("/hub/bun/search");
-        app.MapHub<BunSearchChannelHub>("/hub/bun/search/channel");
+        app.MapHub<BunSearchStreamHub>("/hub/bun/streaming_search");
 
         return app;
     }

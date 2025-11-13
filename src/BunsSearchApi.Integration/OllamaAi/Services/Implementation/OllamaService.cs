@@ -19,13 +19,13 @@ internal class OllamaService(
         PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
     };
     
-    public async Task<OllamaResponse?> GetResponse(string prompt, CancellationToken cancellationToken)
+    public async Task<OllamaResponse?> GetResponse(OllamaRequest request, CancellationToken cancellationToken)
     {
-        var request = new OllamaRequest
+        var requestBody = new
         {
-            Model = ollamaApiOptions.Value.Model,
-            Prompt = prompt,
-            Stream = false
+            model = ollamaApiOptions.Value.Model,
+            prompt = request.Promt,
+            stream = false
         };
         var jsonRequest = JsonSerializer.Serialize(request);
         var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
@@ -43,24 +43,24 @@ internal class OllamaService(
         return result;
     }
     
-    public async IAsyncEnumerable<OllamaChunkResponse>? GetResponseAsStream(string prompt, [EnumeratorCancellation] CancellationToken cancellationToken)
+    public async IAsyncEnumerable<OllamaChunkResponse> GetResponseAsStream(OllamaRequest request, [EnumeratorCancellation] CancellationToken cancellationToken)
     {
-        var requestBody = new OllamaRequest
+        var requestBody = new
         {
             Model = ollamaApiOptions.Value.Model,
-            Prompt = prompt,
+            Prompt = request.Promt,
             Stream = true
         };
         var jsonRequestBody = JsonSerializer.Serialize(requestBody);
         var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
-        var request = new HttpRequestMessage
+        var httpRequest = new HttpRequestMessage
         {
             Method = HttpMethod.Post,
             RequestUri = new Uri(ollamaApiOptions.Value.Url),
             Content = content
         };
             
-        using var response = await httpClient.SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+        using var response = await httpClient.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
         response.EnsureSuccessStatusCode();
         
         await using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
@@ -69,29 +69,25 @@ internal class OllamaService(
         string? line;
         while ((line = await reader.ReadLineAsync(cancellationToken)) != null)
         {
-            if (cancellationToken.IsCancellationRequested)
-                yield break;
+            cancellationToken.ThrowIfCancellationRequested();
 
-            if (string.IsNullOrWhiteSpace(line))
-                continue;
+            if (string.IsNullOrWhiteSpace(line)) yield break;
 
             OllamaStreamResponse? result;
             try
             {
                 result = JsonSerializer.Deserialize<OllamaStreamResponse>(line, _jsonSerializerOptions);
+                if (result == null) yield break;
             }
             catch (Exception ex)
             {
                 logger.LogWarning(ex, "Failed to parse Ollama Stream Response: {Line}", line);
-                continue;
+                yield break;
             }
-            
-            if (result == null) continue;
                 
-            yield return new OllamaChunkResponse(result.Response ?? string.Empty, result.Done);
-
-            if (result.Done)
-                break;
+            yield return new OllamaChunkResponse(request.RequestId, result.Response ?? string.Empty, result.Done);
+            
+            if (result.Done) yield break;
         }
     }
 }

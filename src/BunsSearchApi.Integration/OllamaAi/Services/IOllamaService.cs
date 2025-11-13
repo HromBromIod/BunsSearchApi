@@ -4,7 +4,7 @@ namespace BunsSearchApi.Integration.OllamaAi.Services;
 
 public interface IOllamaService
 {
-    Task<OllamaResponse?> GetResponse(string prompt, CancellationToken cancellationToken);
+    Task<OllamaResponse?> GetResponse(OllamaRequest request, CancellationToken cancellationToken);
 
-    IAsyncEnumerable<OllamaChunkResponse>? GetResponseAsStream(string prompt, CancellationToken cancellationToken);
+    IAsyncEnumerable<OllamaChunkResponse> GetResponseAsStream(OllamaRequest request, CancellationToken cancellationToken);
 }

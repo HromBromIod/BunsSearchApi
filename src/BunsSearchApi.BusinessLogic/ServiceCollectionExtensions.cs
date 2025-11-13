@@ -9,6 +9,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddBusinessLogic(this IServiceCollection serviceCollection)
     {
         serviceCollection.AddScoped<IBunSearchService, BunSearchService>();
+        serviceCollection.AddScoped<IBunStreamSearchService, BunStreamSearchService>();
 
         return serviceCollection;
     }

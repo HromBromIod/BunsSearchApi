@@ -4,7 +4,5 @@ namespace BunsSearchApi.BusinessLogic.Services;
 
 public interface IBunStreamSearchService
 {
-    IAsyncEnumerable<BunChunk> SearchHistoryAsStream(string bunName, CancellationToken cancellationToken);
-    IAsyncEnumerable<BunChunk> SearchStoryAsStream(string bunName, CancellationToken cancellationToken);
-    IAsyncEnumerable<BunChunk> SearchRecipeAsStream(string bunName, CancellationToken cancellationToken);
+    IAsyncEnumerable<BunChunk> SearchAsStream(string bunName, string searchType, CancellationToken cancellationToken = default);
 }
