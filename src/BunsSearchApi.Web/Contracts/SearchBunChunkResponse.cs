@@ -10,4 +10,6 @@ public class SearchBunChunkResponse
     public string? MessageTextChunk { get; set; }
     [JsonPropertyName("is_completed")]
     public required bool IsCompleted { get; set; }
+    [JsonPropertyName("metadata")]
+    public object? Metadata { get; set; }
 }

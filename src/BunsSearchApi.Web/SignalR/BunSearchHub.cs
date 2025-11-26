@@ -9,21 +9,26 @@ public class BunSearchHub(
     IBunSearchService searchService,
     ILogger<BunSearchHub> logger) : Hub
 {
-    public async Task SearchHistory(SearchBunRequest request)
+    public async Task<SearchBunResponse> SearchHistory(SearchBunRequest request)
     {
         var result = await searchService.SearchBunHistory(request.BunName, CancellationToken.None);
-        await Clients.Caller.SendAsync("SearchResponse", result.ToResponse());
+        return result.ToResponse(GetMetadata());
     }
     
-    public async Task SearchStory(SearchBunRequest request)
+    public async Task<SearchBunResponse> SearchStory(SearchBunRequest request)
     {
         var result = await searchService.SearchBunStory(request.BunName, CancellationToken.None);
-        await Clients.Caller.SendAsync("SearchResponse", result.ToResponse());
+        return result.ToResponse(GetMetadata());
     }
     
-    public async Task SearchRecipe(SearchBunRequest request)
+    public async Task<SearchBunResponse> SearchRecipe(SearchBunRequest request)
     {
         var result = await searchService.SearchBunRecipe(request.BunName, CancellationToken.None);
-        await Clients.Caller.SendAsync("SearchResponse", result.ToResponse());
+        return result.ToResponse(GetMetadata());
+    }
+    
+    private static (string MachineName, int ProcessId, DateTime Timestamp) GetMetadata()
+    {
+        return (Environment.MachineName, Environment.ProcessId, DateTime.UtcNow);
     }
 }

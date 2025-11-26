@@ -10,4 +10,6 @@ public class SearchBunResponse
     public required string SearchParameter { get; set; }
     [JsonPropertyName("message_text")]
     public string? MessageText { get; set; }
+    [JsonPropertyName("metadata")]
+    public object? Metadata { get; set; }
 }

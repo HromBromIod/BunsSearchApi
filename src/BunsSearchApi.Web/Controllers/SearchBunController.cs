@@ -16,7 +16,7 @@ public class SearchBunController(
         CancellationToken cancellationToken)
     {
         var bun = await bunSearchService.SearchBunHistory(bunName, cancellationToken);
-        return Ok(bun.ToResponse());
+        return Ok(bun.ToResponse(GetMetadata()));
     }
     
     [HttpGet("{bunName}/story")]
@@ -25,7 +25,7 @@ public class SearchBunController(
         CancellationToken cancellationToken)
     {
         var bun = await bunSearchService.SearchBunStory(bunName, cancellationToken);
-        return Ok(bun.ToResponse());
+        return Ok(bun.ToResponse(GetMetadata()));
     }
     
     [HttpGet("{bunName}/recipe")]
@@ -34,6 +34,11 @@ public class SearchBunController(
         CancellationToken cancellationToken)
     {
         var bun = await bunSearchService.SearchBunRecipe(bunName, cancellationToken);
-        return Ok(bun.ToResponse());
+        return Ok(bun.ToResponse(GetMetadata()));
+    }
+
+    private static (string MachineName, int ProcessId, DateTime Timestamp) GetMetadata()
+    {
+        return (Environment.MachineName, Environment.ProcessId, DateTime.UtcNow);
     }
 }

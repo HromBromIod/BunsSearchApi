@@ -20,7 +20,7 @@ public class BunSearchStreamHub(
             {
                 chunkCounter += 1;
                 logger.LogInformation("Current chunks count {ChunksCount} for request: {RequestId}", chunkCounter, request.RequestId);
-                await Clients.Caller.SendAsync("ReceiveChunk", chunk.ToResponse(), cancellationToken: Context.ConnectionAborted);
+                await Clients.Caller.SendAsync("ReceiveChunk", chunk.ToResponse(GetMetadata()), cancellationToken: Context.ConnectionAborted);
             }
         }
         catch (OperationCanceledException)
@@ -44,5 +44,10 @@ public class BunSearchStreamHub(
     {
         logger.LogInformation("Client disconnected: {ConnectionId}", Context.ConnectionId);
         await base.OnDisconnectedAsync(exception);
+    }
+
+    private static (string MachineName, int ProcessId, DateTime Timestamp) GetMetadata()
+    {
+        return (Environment.MachineName, Environment.ProcessId, DateTime.UtcNow);
     }
 }

@@ -27,7 +27,7 @@ internal class OllamaService(
             prompt = request.Promt,
             stream = false
         };
-        var jsonRequest = JsonSerializer.Serialize(request);
+        var jsonRequest = JsonSerializer.Serialize(requestBody);
         var content = new StringContent(jsonRequest, Encoding.UTF8, "application/json");
             
         var response = await httpClient.PostAsync(ollamaApiOptions.Value.Url, content, cancellationToken);
@@ -35,7 +35,7 @@ internal class OllamaService(
         
         if (!response.IsSuccessStatusCode)
         {
-            logger.LogError($"Ошибка OllamaAPI: {response.StatusCode}.\nResponseContent: {responseContent}");
+            logger.LogError($"Ошибка OllamaAPI: {response.StatusCode}. ResponseContent: {responseContent}");
             return null;
         }
 
@@ -47,9 +47,9 @@ internal class OllamaService(
     {
         var requestBody = new
         {
-            Model = ollamaApiOptions.Value.Model,
-            Prompt = request.Promt,
-            Stream = true
+            model = ollamaApiOptions.Value.Model,
+            prompt = request.Promt,
+            stream = true
         };
         var jsonRequestBody = JsonSerializer.Serialize(requestBody);
         var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");

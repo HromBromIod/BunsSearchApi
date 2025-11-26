@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         builder.Services.AddBusinessLogic();
         builder.Services.AddSignalR();
         builder.Services.AddControllers();
+        builder.Services.AddHealthChecks();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
@@ -29,8 +30,15 @@ public static class ServiceCollectionExtensions
         }
         app.UseExceptionHandling(app.Services.GetRequiredService<ILoggerFactory>());
         app.MapControllers();
+        app.MapHealthChecks("/health");
         app.MapHub<BunSearchHub>("/hub/bun/search");
         app.MapHub<BunSearchStreamHub>("/hub/bun/streaming_search");
+        app.Map("/info", () => new
+        {
+            machine_name = Environment.MachineName,
+            process_id = Environment.ProcessId,
+            timestamp = DateTime.UtcNow
+        });
 
         return app;
     }
